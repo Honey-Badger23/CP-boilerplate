@@ -1,0 +1,28 @@
+modules = ["python-3.10", "nodejs-18:v18-20240117-0bd73cd", "web"]
+run = "npm run dev"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "npm run dev"]
+
+[workflows]
+runButton = "Frontend Dev"
+
+[[workflows.workflow]]
+name = "Frontend Dev"
+author = 31630563
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && yarn --ignore-engines dev"
+
+[[ports]]
+localPort = 8080
+externalPort = 80
+
+[[ports]]
+localPort = 8081
+externalPort = 8081
